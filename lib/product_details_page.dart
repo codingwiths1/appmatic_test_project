@@ -2,10 +2,12 @@ import 'package:appmatic_test_project/core/clipper/clipper.dart';
 import 'package:appmatic_test_project/core/component/app_button.dart';
 import 'package:appmatic_test_project/core/extention/extention.dart';
 import 'package:appmatic_test_project/core/theme/theme.dart';
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 
 import 'package:iconsax/iconsax.dart';
 import 'package:readmore/readmore.dart';
+@RoutePage()
 
 class ProductDetailsPage extends StatelessWidget {
   const ProductDetailsPage({super.key});

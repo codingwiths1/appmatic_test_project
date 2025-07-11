@@ -2,9 +2,10 @@ import 'package:appmatic_test_project/core/component/app_button.dart';
 import 'package:appmatic_test_project/core/component/cart_product_item.dart';
 import 'package:appmatic_test_project/core/extention/extention.dart';
 import 'package:appmatic_test_project/core/theme/theme.dart';
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+@RoutePage()
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
 
@@ -62,7 +63,7 @@ class CartPage extends StatelessWidget {
 
       /// BottomNavBar
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 20, left: 16, right: 16),
+        padding: const EdgeInsets.only(bottom: 100, left: 16, right: 16),
         child: AppButton.bigButton(
           context,
           child: Text(

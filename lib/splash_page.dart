@@ -1,6 +1,8 @@
 import 'package:appmatic_test_project/core/extention/extention.dart';
 import 'package:appmatic_test_project/core/theme/theme.dart';
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
+@RoutePage()
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
