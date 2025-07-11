@@ -151,12 +151,36 @@ class HomePage extends StatelessWidget {
             30.0.toVert,
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: MasonryGridView.builder(
+              child: Api.productList.isEmpty? MasonryGridView.builder(
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: 20,
+                gridDelegate:
+                    const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                    ),
+                itemBuilder: (context, _) {
+                  return Container(
+                    height: 200,
+                    width: double.maxFinite,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: AppColors.white,
+                    ),
+                    child: const Center(
+                      child: CircularProgressIndicator(color: AppColors.blue),
+                    ),
+                  );
+                },
+              ):
+              MasonryGridView.builder(
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: Api.productList.length,
                 gridDelegate:
                     const SliverSimpleGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,

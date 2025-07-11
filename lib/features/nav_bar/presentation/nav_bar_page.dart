@@ -1,4 +1,4 @@
-import 'package:appmatic_test_project/cart_page.dart';
+import 'package:appmatic_test_project/features/cart/presentation/pages/cart_page.dart';
 import 'package:appmatic_test_project/core/theme/theme.dart';
 import 'package:appmatic_test_project/features/home/presentation/home_page.dart';
 import 'package:appmatic_test_project/features/nav_bar/bloc/nav_bar_cubit.dart';

@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 
 class Api {
   static List productList = [];
+
   static bool fetching = true;
   static final url = Uri.parse("https://fakestoreapi.com/products");
 

@@ -1,8 +1,10 @@
 import 'package:appmatic_test_project/core/clipper/clipper.dart';
 import 'package:appmatic_test_project/core/component/app_button.dart';
 import 'package:appmatic_test_project/core/extention/extention.dart';
+import 'package:appmatic_test_project/core/router/app_router.dart';
 import 'package:appmatic_test_project/core/theme/theme.dart';
-import 'package:auto_route/annotations.dart';
+import 'package:appmatic_test_project/features/cart/function/cart_function.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +17,14 @@ class ProductDetailsPage extends StatelessWidget {
   final Map? product;
   @override
   Widget build(BuildContext context) {
+    checkProduct(Map item) {
+      if (CartFunction.cartList.contains(item)) {
+        debugPrint("ALREADY ADDED");
+      } else {
+        CartFunction.cartList.add(item);
+      }
+    }
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: const CupertinoNavigationBar(
@@ -45,15 +55,22 @@ class ProductDetailsPage extends StatelessWidget {
                     child: SizedBox(
                       height: 250,
                       width: 250,
-                      child: Image.network(frameBuilder: (context, child, frame, _){
-                        if(frame != null){
-                          return child;
-                        }else{
-                          return const SizedBox(
+                      child: Image.network(
+                        frameBuilder: (context, child, frame, _) {
+                          if (frame != null) {
+                            return child;
+                          } else {
+                            return const SizedBox(
                               height: 250,
-                              width: 250,child: Center(child: CircularProgressIndicator(color: AppColors.blue,)));
-                        }
-                      } ,
+                              width: 250,
+                              child: Center(
+                                child: CircularProgressIndicator(
+                                  color: AppColors.blue,
+                                ),
+                              ),
+                            );
+                          }
+                        },
                         errorBuilder: (context, error, stackTrace) =>
                             const Icon(Icons.error),
                         product!["image"],
@@ -179,6 +196,13 @@ class ProductDetailsPage extends StatelessWidget {
 
                   /// Checkout Button
                   AppButton.bigButton(
+                    onPressed: () {
+                      if (CartFunction.cartList.isNotEmpty) {
+                        context.router.push(const CartRoute());
+                      } else {
+                        debugPrint("ADD TO CART");
+                      }
+                    },
                     context,
                     child: Center(
                       child: Text(
@@ -231,26 +255,12 @@ class ProductDetailsPage extends StatelessWidget {
         padding: const EdgeInsets.only(right: 15.0),
         width: double.infinity,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Row(
-              children: [
-                AppButton.circularButton(
-                  context,
-                  child: const Icon(Iconsax.minus, color: AppColors.white),
-                ),
-                Text("3", style: Theme.of(context).textTheme.titleMedium),
-                AppButton.circularButton(
-                  context,
-                  child: const Icon(Iconsax.add, color: AppColors.white),
-                ),
-              ],
-            ),
-
             /// Add To Cart
             AppButton.bigButton(
               onPressed: () {
-                debugPrint("Tapped");
+                checkProduct(product!);
               },
               context,
               child: Container(
@@ -260,7 +270,7 @@ class ProductDetailsPage extends StatelessWidget {
                     const Icon(Iconsax.shopping_cart, color: AppColors.white),
                     5.0.toHor,
                     Text(
-                      "Cart",
+                      "Add to Cart",
                       style: Theme.of(
                         context,
                       ).textTheme.bodyLarge!.copyWith(color: AppColors.white),

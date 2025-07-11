@@ -1,8 +1,14 @@
+import 'package:appmatic_test_project/core/extention/extention.dart';
+import 'package:appmatic_test_project/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class CartProductItem extends StatelessWidget {
-  const CartProductItem({super.key, this.usePriceRow = true});
-
+  const CartProductItem({
+    super.key,
+    this.usePriceRow = true,
+    required this.product,
+  });
+  final Map product;
   final bool usePriceRow;
   @override
   Widget build(BuildContext context) {
@@ -16,8 +22,8 @@ class CartProductItem extends StatelessWidget {
       child: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
+
+
             children: [
               /// Product Image
               SizedBox(
@@ -25,52 +31,51 @@ class CartProductItem extends StatelessWidget {
                 height: 90,
                 child: ClipRRect(
                   borderRadius: BorderRadiusGeometry.circular(10),
-                  child: Image.asset("", fit: BoxFit.contain),
-                ),
-              ),
-
-              /// Product WriteUp
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Nike"),
-                    LayoutBuilder(
-                      builder: (context, constraints) {
-                        return SizedBox(
-                          width: constraints.maxWidth - 25,
-                          child: Text(
-                            "",
-                            overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context).textTheme.titleMedium,
+                  child:  Image.network(
+                    frameBuilder: (context, child, frame, _) {
+                      if (frame != null) {
+                        return child;
+                      } else {
+                        return const SizedBox(
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              color: AppColors.blue,
+                            ),
                           ),
                         );
-                      },
-                    ),
-
-                    /// Counter && PriceTag  Row
-                    usePriceRow
-                        ? Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "\$100",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineSmall!
-                                    .copyWith(fontWeight: FontWeight.w600),
-                                textAlign: TextAlign.end,
-                              ),
-                            ],
-                          )
-                        : Text(
-                            "\$100",
-                            style: Theme.of(context).textTheme.headlineSmall!
-                                .copyWith(fontWeight: FontWeight.w600),
-                            textAlign: TextAlign.end,
-                          ),
-                  ],
+                      }
+                    },
+                    errorBuilder: (context, error, stackTrace) =>
+                    const Icon(Icons.error),
+                    product["image"],
+                    height: 180,
+                    width: double.infinity,
+                    fit: BoxFit.contain,
+                  ),
                 ),
+              ),
+              10.0.toHor,
+
+              /// Product WriteUp
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    product["title"],
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+
+                  /// Counter && PriceTag  Row
+                  Text(
+                    "\$${product["price"]}",
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                    textAlign: TextAlign.end,
+                  ),
+                ],
               ),
             ],
           ),
