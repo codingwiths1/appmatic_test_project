@@ -1,6 +1,7 @@
 import 'package:appmatic_test_project/core/extention/extention.dart';
 import 'package:appmatic_test_project/core/router/app_router.dart';
 import 'package:appmatic_test_project/core/theme/theme.dart';
+import 'package:appmatic_test_project/core/utils/notifications.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
@@ -17,15 +18,14 @@ class _SplashPageState extends State<SplashPage> {
     context.router.replaceAll([const NavBarRoute()]);
   }
 
+  delayAutoNavigation() {
+    Future.delayed(const Duration(seconds: 3), () => autoNavigation());
+  }
+
   @override
   void initState() {
     super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(const Duration(seconds: 3), () => autoNavigation());
-
-      // Api.fetchProduct(context);
-    });
+    WidgetsBinding.instance.addPostFrameCallback((_) => delayAutoNavigation());
   }
 
   @override

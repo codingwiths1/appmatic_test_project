@@ -1,17 +1,29 @@
+import 'package:appmatic_test_project/app_widget.dart';
 import 'package:appmatic_test_project/core/api/api.dart';
 import 'package:appmatic_test_project/core/component/clipper_container.dart';
 import 'package:appmatic_test_project/core/component/product_display_card.dart';
 import 'package:appmatic_test_project/core/extention/extention.dart';
 import 'package:appmatic_test_project/core/router/app_router.dart';
 import 'package:appmatic_test_project/core/theme/theme.dart';
+import 'package:appmatic_test_project/features/cart/function/cart_function.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:iconsax/iconsax.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    Api.fetchProduct();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +93,7 @@ class HomePage extends StatelessWidget {
                                     ),
                                     child: Center(
                                       child: Text(
-                                        "2",
+                                        "${CartFunction.cartList.length}",
                                         style: Theme.of(context)
                                             .textTheme
                                             .titleSmall!

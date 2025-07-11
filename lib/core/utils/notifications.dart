@@ -1,12 +1,15 @@
+import 'package:appmatic_test_project/app_widget.dart';
 import 'package:appmatic_test_project/core/api/api.dart';
 import 'package:appmatic_test_project/core/extention/extention.dart';
 import 'package:appmatic_test_project/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class Notifications {
-  static message(BuildContext context, {required String message}) {
-    ScaffoldMessenger.of(context).removeCurrentSnackBar();
-    ScaffoldMessenger.of(context).showSnackBar(
+  static message({required String message}) {
+    ScaffoldMessenger.of(
+      appRouter.navigatorKey.currentContext!,
+    ).removeCurrentSnackBar();
+    ScaffoldMessenger.of(appRouter.navigatorKey.currentContext!).showSnackBar(
       SnackBar(
         duration: const Duration(seconds: 3),
         margin: const EdgeInsets.all(16),
@@ -16,19 +19,22 @@ class Notifications {
         backgroundColor: AppColors.grey800,
         content: Text(
           message,
-          style: Theme.of(context).textTheme.titleLarge!.copyWith(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-            color: AppColors.white,
-          ),
+          style: Theme.of(appRouter.navigatorKey.currentContext!)
+              .textTheme
+              .titleLarge!
+              .copyWith(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: AppColors.white,
+              ),
         ),
       ),
     );
   }
 
-  static error(String message, BuildContext context) {
+  static error(String message) {
     showDialog(
-      context: context,
+      context: appRouter.navigatorKey.currentContext!,
       builder: (context) => AlertDialog(
         backgroundColor: AppColors.grey800,
         shape: RoundedRectangleBorder(
@@ -53,7 +59,10 @@ class Notifications {
                 fixedSize: const Size(double.maxFinite, 40),
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
-              onPressed: () => Api.fetchProduct(context),
+              onPressed: () {Navigator.pop(context);
+                Api.fetchProduct();
+
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

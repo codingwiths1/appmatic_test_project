@@ -12,7 +12,6 @@ class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appRouter = AppRouter();
     return MultiBlocProvider(
       providers: [BlocProvider(create: (context) => NavBarCubit())],
       child: MaterialApp.router(
@@ -24,3 +23,4 @@ class AppWidget extends StatelessWidget {
     );
   }
 }
+final AppRouter appRouter = AppRouter();

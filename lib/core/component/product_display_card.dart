@@ -14,10 +14,10 @@ class ProductDisplayCard extends StatelessWidget {
   Widget build(BuildContext context) {
     checkProduct(Map item) {
       if (CartFunction.cartList.contains(item)) {
-        Notifications.message(context, message: "ALREADY ADDED");
+        Notifications.message(message: "ALREADY ADDED");
       } else {
         CartFunction.cartList.add(item);
-        Notifications.message(context, message: "ADDED TO CART");
+        Notifications.message(message: "ADDED TO CART");
       }
     }
 

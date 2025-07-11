@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:iconsax/iconsax.dart';
-@RoutePage()
 
+@RoutePage()
 class NavBarPage extends StatelessWidget {
   const NavBarPage({super.key});
 
@@ -17,14 +17,18 @@ class NavBarPage extends StatelessWidget {
     const List<Widget> pages = [HomePage(), CartPage()];
     return BlocBuilder<NavBarCubit, int>(
       builder: (context, state) {
-        return Scaffold(extendBody: true,
+        return Scaffold(
+          extendBody: true,
           body: pages[state],
-          bottomNavigationBar: Container(height: 90,padding: const EdgeInsets.only(bottom: 10.0),
+          bottomNavigationBar: Container(
+            height: 90,
+            padding: const EdgeInsets.only(bottom: 10.0),
             child: GNav(
               onTabChange: (indx) =>
                   context.read<NavBarCubit>().changeState(indx),
               padding: const EdgeInsets.all(20.0),
               textStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
+                color: AppColors.white,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
@@ -33,8 +37,8 @@ class NavBarPage extends StatelessWidget {
               color: Colors.grey[400],
               gap: 10,
               tabBorderRadius: 20,
-              activeColor: AppColors.black,
-              tabBackgroundColor: AppColors.white,
+              activeColor: AppColors.white,
+              tabBackgroundColor: AppColors.grey800!,
               tabs: const <GButton>[
                 GButton(
                   icon: Iconsax.home,

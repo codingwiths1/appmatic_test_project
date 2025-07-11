@@ -20,10 +20,10 @@ class ProductDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     checkProduct(Map item) {
       if (CartFunction.cartList.contains(item)) {
-        Notifications.message(context, message: "ALREADY ADDED");
+        Notifications.message(message: "ALREADY ADDED");
       } else {
         CartFunction.cartList.add(item);
-        Notifications.message(context, message: "ADDED TO CART");
+        Notifications.message(message: "ADDED TO CART");
       }
     }
 
@@ -202,7 +202,7 @@ class ProductDetailsPage extends StatelessWidget {
                       if (CartFunction.cartList.isNotEmpty) {
                         context.router.push(const CartRoute());
                       } else {
-                        Notifications.message(context, message: "EMPTY CART");
+                        Notifications.message(message: "EMPTY CART");
                       }
                     },
                     context,
