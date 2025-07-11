@@ -12,7 +12,13 @@ class SplashPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text("Appmatic Infotech"),
+            Text(
+              "Appmatic Infotech",
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             20.0.toVert,
             const CircularProgressIndicator(color: AppColors.blue),
           ],

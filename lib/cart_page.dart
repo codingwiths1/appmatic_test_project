@@ -1,3 +1,4 @@
+import 'package:appmatic_test_project/core/component/app_button.dart';
 import 'package:appmatic_test_project/core/component/cart_product_item.dart';
 import 'package:appmatic_test_project/core/extention/extention.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,19 +13,24 @@ class CartPage extends StatelessWidget {
       extendBodyBehindAppBar: true,
 
       /// AppBar
-      appBar: const CupertinoNavigationBar(
-        automaticallyImplyLeading: true,
+      appBar: CupertinoNavigationBar(
         previousPageTitle: "Back",
-        middle: Text("Cart"),
+        middle: Text(
+          "Cart",
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
 
       /// Body
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsetsGeometry.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             children: [
-              20.0.toVert,
+              30.0.toVert,
               ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
@@ -45,7 +51,7 @@ class CartPage extends StatelessWidget {
                   );
                 },
                 separatorBuilder: (BuildContext context, int index) =>
-                    25.0.toVert,
+                    const SizedBox(height: 25),
                 itemCount: 10,
               ),
             ],
@@ -53,22 +59,10 @@ class CartPage extends StatelessWidget {
         ),
       ),
 
-      // BottomNavBar
-      bottomNavigationBar: SizedBox(
-        height: 70,
-        child: GestureDetector(
-          onTap: () {},
-          child: Button(
-            margin: aPadding,
-            padding: aPadding,
-            child: Text(
-              "Cashout \$1000",
-              style: Theme.of(
-                context,
-              ).textTheme.titleLarge!.copyWith(color: whiteColor),
-            ),
-          ),
-        ),
+      /// BottomNavBar
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(bottom: 20, left: 16, right: 16),
+        child: AppButton.bigButton(context, () {}),
       ),
     );
   }

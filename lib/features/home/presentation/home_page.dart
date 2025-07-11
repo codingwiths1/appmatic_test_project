@@ -1,7 +1,5 @@
-import 'package:appmatic_test_project/core/clipper/clipper.dart';
 import 'package:appmatic_test_project/core/component/clipper_container.dart';
 import 'package:appmatic_test_project/core/extention/extention.dart';
-import 'package:appmatic_test_project/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
