@@ -2,7 +2,9 @@ import 'package:appmatic_test_project/core/api/api.dart';
 import 'package:appmatic_test_project/core/component/clipper_container.dart';
 import 'package:appmatic_test_project/core/component/product_display_card.dart';
 import 'package:appmatic_test_project/core/extention/extention.dart';
+import 'package:appmatic_test_project/core/router/app_router.dart';
 import 'package:appmatic_test_project/core/theme/theme.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:iconsax/iconsax.dart';
@@ -54,7 +56,7 @@ class HomePage extends StatelessWidget {
                         //........................... Shopping Bag Icon Stack ............................//
                         GestureDetector(
                           onTap: () {
-                            debugPrint("TAPPED");
+                          context.router.push(const CartRoute());
                           },
                           child: Container(
                             color: Colors.transparent,

@@ -3,6 +3,7 @@ import 'package:appmatic_test_project/core/component/app_button.dart';
 import 'package:appmatic_test_project/core/extention/extention.dart';
 import 'package:appmatic_test_project/core/router/app_router.dart';
 import 'package:appmatic_test_project/core/theme/theme.dart';
+import 'package:appmatic_test_project/core/utils/notifications.dart';
 import 'package:appmatic_test_project/features/cart/function/cart_function.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,16 +20,17 @@ class ProductDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     checkProduct(Map item) {
       if (CartFunction.cartList.contains(item)) {
-        debugPrint("ALREADY ADDED");
+        Notifications.message(context, message: "ALREADY ADDED");
       } else {
         CartFunction.cartList.add(item);
+        Notifications.message(context, message: "ADDED TO CART");
       }
     }
 
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: const CupertinoNavigationBar(
-        backgroundColor: AppColors.transparent,
+        backgroundColor: Color(0x00ffffff),
         enableBackgroundFilterBlur: false,
         automaticallyImplyLeading: true,
         previousPageTitle: "Back",
@@ -200,7 +202,7 @@ class ProductDetailsPage extends StatelessWidget {
                       if (CartFunction.cartList.isNotEmpty) {
                         context.router.push(const CartRoute());
                       } else {
-                        debugPrint("ADD TO CART");
+                        Notifications.message(context, message: "EMPTY CART");
                       }
                     },
                     context,

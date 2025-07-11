@@ -10,7 +10,6 @@
 
 part of 'app_router.dart';
 
-
 /// generated route for
 /// [CartPage]
 class CartRoute extends PageRouteInfo<void> {

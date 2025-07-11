@@ -15,7 +15,6 @@ class ClipperContainer extends StatelessWidget {
             color: AppColors.blue,
             height: 230,
             width: double.infinity,
-            child: child,
           ),
         ),
         const Positioned(
@@ -28,6 +27,7 @@ class ClipperContainer extends StatelessWidget {
           bottom: -30,
           child: Icon(Icons.circle, size: 150, color: AppColors.white26),
         ),
+        child
       ],
     );
   }

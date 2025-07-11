@@ -1,7 +1,8 @@
-import 'package:appmatic_test_project/core/api/api.dart';
 import 'package:appmatic_test_project/core/extention/extention.dart';
 import 'package:appmatic_test_project/core/router/app_router.dart';
 import 'package:appmatic_test_project/core/theme/theme.dart';
+import 'package:appmatic_test_project/core/utils/notifications.dart';
+import 'package:appmatic_test_project/features/cart/function/cart_function.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -11,7 +12,15 @@ class ProductDisplayCard extends StatelessWidget {
   final Map product;
   @override
   Widget build(BuildContext context) {
-    //........................... Overall Container ............................//
+    checkProduct(Map item) {
+      if (CartFunction.cartList.contains(item)) {
+        Notifications.message(context, message: "ALREADY ADDED");
+      } else {
+        CartFunction.cartList.add(item);
+        Notifications.message(context, message: "ADDED TO CART");
+      }
+    }
+
     return GestureDetector(
       onTap: () {
         context.router.push(ProductDetailsRoute(product: product));
@@ -135,7 +144,9 @@ class ProductDisplayCard extends StatelessWidget {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            checkProduct(product);
+                          },
                           child: Container(
                             height: 40,
                             width: 40,
