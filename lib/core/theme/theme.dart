@@ -6,6 +6,10 @@ class AppColors {
   static const Color transparent = Color(0x00000000);
   static const Color white26 = Color(0x26ffffff);
   static const Color white = Color(0xffffffff);
+  static const Color black = Color(0xff000000);
+  static Color? yellow = Colors.yellow;
+
+
 }
 
 final lightMode = ThemeData(
@@ -14,3 +18,4 @@ final lightMode = ThemeData(
   fontFamily: "SF-Pro-Rounded",
   scaffoldBackgroundColor: AppColors.backgroundColor,
 );
+

@@ -13,7 +13,7 @@ class ClipperContainer extends StatelessWidget {
           clipper: Clipper(),
           child: Container(
             color: AppColors.blue,
-            height: 200,
+            height: 230,
             width: double.infinity,
             child: child,
           ),
