@@ -1,6 +1,7 @@
 import 'package:appmatic_test_project/core/component/app_button.dart';
 import 'package:appmatic_test_project/core/component/cart_product_item.dart';
 import 'package:appmatic_test_project/core/extention/extention.dart';
+import 'package:appmatic_test_project/core/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -62,7 +63,17 @@ class CartPage extends StatelessWidget {
       /// BottomNavBar
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 20, left: 16, right: 16),
-        child: AppButton.bigButton(context, () {}),
+        child: AppButton.bigButton(
+          context,
+          child: Text(
+            "Cashout \$1000",
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              fontSize: 16,
+              color: AppColors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
       ),
     );
   }
