@@ -10,6 +10,8 @@ class AppColors {
   static const Color black = Color(0xff000000);
   static Color? yellow = Colors.yellow;
 
+  static Color? grey800 = Colors.grey[800];
+
 
 }
 

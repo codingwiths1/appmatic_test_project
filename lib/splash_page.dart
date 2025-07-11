@@ -2,6 +2,7 @@ import 'package:appmatic_test_project/core/api/api.dart';
 import 'package:appmatic_test_project/core/extention/extention.dart';
 import 'package:appmatic_test_project/core/router/app_router.dart';
 import 'package:appmatic_test_project/core/theme/theme.dart';
+import 'package:appmatic_test_project/core/utils/notifications.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -21,13 +22,14 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   @override
-  void initState() {  super.initState();
-  if (!mounted) return;
-  WidgetsBinding.instance.addPostFrameCallback(
-      (_) { Future.delayed(const Duration(seconds: 5), () => autoNavigation());
-        Api.fetchProduct();},
-    );
+  void initState() {
+    super.initState();
 
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(seconds: 5), () => autoNavigation());
+
+      Api.fetchProduct();
+    });
   }
 
   @override
