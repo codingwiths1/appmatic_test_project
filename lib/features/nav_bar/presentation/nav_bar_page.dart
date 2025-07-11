@@ -2,10 +2,12 @@ import 'package:appmatic_test_project/cart_page.dart';
 import 'package:appmatic_test_project/core/theme/theme.dart';
 import 'package:appmatic_test_project/features/home/presentation/home_page.dart';
 import 'package:appmatic_test_project/features/nav_bar/bloc/nav_bar_cubit.dart';
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:iconsax/iconsax.dart';
+@RoutePage()
 
 class NavBarPage extends StatelessWidget {
   const NavBarPage({super.key});
