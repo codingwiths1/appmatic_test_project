@@ -10,6 +10,7 @@
 
 part of 'app_router.dart';
 
+
 /// generated route for
 /// [CartPage]
 class CartRoute extends PageRouteInfo<void> {
@@ -44,18 +45,52 @@ class NavBarRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [ProductDetailsPage]
-class ProductDetailsRoute extends PageRouteInfo<void> {
-  const ProductDetailsRoute({List<PageRouteInfo>? children})
-    : super(ProductDetailsRoute.name, initialChildren: children);
+class ProductDetailsRoute extends PageRouteInfo<ProductDetailsRouteArgs> {
+  ProductDetailsRoute({
+    Key? key,
+    Map<dynamic, dynamic>? product,
+    List<PageRouteInfo>? children,
+  }) : super(
+         ProductDetailsRoute.name,
+         args: ProductDetailsRouteArgs(key: key, product: product),
+         initialChildren: children,
+       );
 
   static const String name = 'ProductDetailsRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const ProductDetailsPage();
+      final args = data.argsAs<ProductDetailsRouteArgs>(
+        orElse: () => const ProductDetailsRouteArgs(),
+      );
+      return ProductDetailsPage(key: args.key, product: args.product);
     },
   );
+}
+
+class ProductDetailsRouteArgs {
+  const ProductDetailsRouteArgs({this.key, this.product});
+
+  final Key? key;
+
+  final Map<dynamic, dynamic>? product;
+
+  @override
+  String toString() {
+    return 'ProductDetailsRouteArgs{key: $key, product: $product}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! ProductDetailsRouteArgs) return false;
+    return key == other.key &&
+        const MapEquality().equals(product, other.product);
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ const MapEquality().hash(product);
 }
 
 /// generated route for

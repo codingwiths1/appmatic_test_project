@@ -3,20 +3,28 @@ import 'package:appmatic_test_project/core/component/app_button.dart';
 import 'package:appmatic_test_project/core/extention/extention.dart';
 import 'package:appmatic_test_project/core/theme/theme.dart';
 import 'package:auto_route/annotations.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:iconsax/iconsax.dart';
 import 'package:readmore/readmore.dart';
+
 @RoutePage()
-
 class ProductDetailsPage extends StatelessWidget {
-  const ProductDetailsPage({super.key});
-
+  const ProductDetailsPage({super.key, this.product});
+  final Map? product;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-
+      appBar: const CupertinoNavigationBar(
+        backgroundColor: AppColors.transparent,
+        enableBackgroundFilterBlur: false,
+        automaticallyImplyLeading: true,
+        previousPageTitle: "Back",
+        transitionBetweenRoutes: true,
+        trailing: Icon(Iconsax.heart),
+      ),
       body: SingleChildScrollView(
         //........................... Overall Column ............................//
         child: Column(
@@ -24,10 +32,37 @@ class ProductDetailsPage extends StatelessWidget {
           children: [
             ClipPath(
               clipper: Clipper(),
-              child: Container(
-                height: 300,
-                width: double.maxFinite,
-                color: AppColors.black,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    height: 300,
+                    width: double.maxFinite,
+                    color: AppColors.white,
+                  ),
+                  Positioned(
+                    bottom: 40,
+                    child: SizedBox(
+                      height: 250,
+                      width: 250,
+                      child: Image.network(frameBuilder: (context, child, frame, _){
+                        if(frame != null){
+                          return child;
+                        }else{
+                          return const SizedBox(
+                              height: 250,
+                              width: 250,child: Center(child: CircularProgressIndicator(color: AppColors.blue,)));
+                        }
+                      } ,
+                        errorBuilder: (context, error, stackTrace) =>
+                            const Icon(Icons.error),
+                        product!["image"],
+                        width: double.infinity,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
 
@@ -96,7 +131,7 @@ class ProductDetailsPage extends StatelessWidget {
                       10.0.toHor,
 
                       Text(
-                        "\$100",
+                        "\$${product!["price"]}",
                         style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -111,7 +146,7 @@ class ProductDetailsPage extends StatelessWidget {
                   Text(
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    "Name",
+                    product!["title"],
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(),
                   ),
                   10.0.toVert,
@@ -170,7 +205,7 @@ class ProductDetailsPage extends StatelessWidget {
 
                   /// Product Description
                   ReadMoreText(
-                    "Description",
+                    product!["description"],
                     trimExpandedText: "...Read less \u2191",
                     trimCollapsedText: "Read more",
                     trimMode: TrimMode.Line,
@@ -181,7 +216,7 @@ class ProductDetailsPage extends StatelessWidget {
                     lessStyle: Theme.of(
                       context,
                     ).textTheme.titleMedium!.copyWith(color: AppColors.blue),
-                    trimLines: 1,
+                    trimLines: 5,
                   ),
                 ],
               ),
@@ -223,6 +258,7 @@ class ProductDetailsPage extends StatelessWidget {
                 child: Row(
                   children: [
                     const Icon(Iconsax.shopping_cart, color: AppColors.white),
+                    5.0.toHor,
                     Text(
                       "Cart",
                       style: Theme.of(

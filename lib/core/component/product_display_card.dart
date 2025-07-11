@@ -1,16 +1,21 @@
+import 'package:appmatic_test_project/core/api/api.dart';
 import 'package:appmatic_test_project/core/extention/extention.dart';
+import 'package:appmatic_test_project/core/router/app_router.dart';
 import 'package:appmatic_test_project/core/theme/theme.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProductDisplayCard extends StatelessWidget {
-  const ProductDisplayCard({super.key});
-
+  const ProductDisplayCard({super.key, required this.product});
+  final Map product;
   @override
   Widget build(BuildContext context) {
     //........................... Overall Container ............................//
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        context.router.push(ProductDetailsRoute(product: product));
+      },
       child: Container(
         height: 331,
         padding: const EdgeInsets.all(1),
@@ -25,19 +30,33 @@ class ProductDisplayCard extends StatelessWidget {
             //........................... Stack Widget Image && Discount && Favourite ............................//
             Stack(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    height: 180,
-                    width: double.infinity,
-                    color: AppColors.blue,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(
+                      frameBuilder: (context, child, frame, _) {
+                        if (frame != null) {
+                          return child;
+                        } else {
+                          return const SizedBox(
+                            height: 180,
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                color: AppColors.blue,
+                              ),
+                            ),
+                          );
+                        }
+                      },
+                      errorBuilder: (context, error, stackTrace) =>
+                          const Icon(Icons.error),
+                      product["image"],
+                      height: 180,
+                      width: double.infinity,
+                      fit: BoxFit.contain,
+                    ),
                   ),
-                  // Image.asset(
-                  //   product["Imageurl"],
-                  //   height: 180,
-                  //   width: double.infinity,
-                  //   fit: BoxFit.contain,
-                  // ),
                 ),
                 Positioned(
                   top: 5,
@@ -84,20 +103,20 @@ class ProductDisplayCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      "",
-                      style: Theme.of(context).textTheme.titleMedium!.apply(
-                        color: Theme.of(context).colorScheme.primary,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      child: Text(
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        product["title"],
+                        style: Theme.of(context).textTheme.titleMedium!
+                            .copyWith(
+                              color: AppColors.black,
+                              fontWeight: FontWeight.w500,
+                            ),
                       ),
                     ),
                     5.0.toVert,
-
-                    //........................... Product Brand ............................//
-                    // product["Brandname"].trim().isNotEmpty
-                    //     ? VerifiedBrandName(brandName: product["Brandname"])
-                    //     : SizedBox.shrink(),
 
                     //........................... Pricing && Add Icon ............................//// LayoutBuilder(
                     const Spacer(),
@@ -109,7 +128,7 @@ class ProductDisplayCard extends StatelessWidget {
                           child: Text(
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            "\$100",
+                            "\$${product["price"]}",
                             style: Theme.of(
                               context,
                             ).textTheme.headlineMedium!.copyWith(fontSize: 20),

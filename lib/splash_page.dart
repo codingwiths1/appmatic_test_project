@@ -1,3 +1,4 @@
+import 'package:appmatic_test_project/core/api/api.dart';
 import 'package:appmatic_test_project/core/extention/extention.dart';
 import 'package:appmatic_test_project/core/router/app_router.dart';
 import 'package:appmatic_test_project/core/theme/theme.dart';
@@ -20,11 +21,13 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) => Future.delayed(const Duration(seconds: 5), () => autoNavigation()),
+  void initState() {  super.initState();
+  if (!mounted) return;
+  WidgetsBinding.instance.addPostFrameCallback(
+      (_) { Future.delayed(const Duration(seconds: 5), () => autoNavigation());
+        Api.fetchProduct();},
     );
-    super.initState();
+
   }
 
   @override

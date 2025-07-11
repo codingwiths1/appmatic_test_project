@@ -1,3 +1,4 @@
+import 'package:appmatic_test_project/core/api/api.dart';
 import 'package:appmatic_test_project/core/component/clipper_container.dart';
 import 'package:appmatic_test_project/core/component/product_display_card.dart';
 import 'package:appmatic_test_project/core/extention/extention.dart';
@@ -161,7 +162,8 @@ class HomePage extends StatelessWidget {
                       crossAxisCount: 2,
                     ),
                 itemBuilder: (context, index) {
-                  return const ProductDisplayCard();
+                  Map product = Api.productList[index];
+                  return ProductDisplayCard(product: product,);
                 },
               ),
             ),
