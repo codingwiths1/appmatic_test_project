@@ -1,7 +1,6 @@
 import 'package:appmatic_test_project/core/extention/extention.dart';
 import 'package:appmatic_test_project/core/router/app_router.dart';
 import 'package:appmatic_test_project/core/theme/theme.dart';
-import 'package:appmatic_test_project/core/utils/notifications.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 

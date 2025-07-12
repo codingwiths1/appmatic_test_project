@@ -5,8 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
-  static List productList = [];
-
   static final url = Uri.parse("https://fakestoreapi.com/products");
 
   static fetchProduct() async {
@@ -14,15 +12,18 @@ class Api {
       var request = await http.get(url);
 
       if (request.statusCode == 200) {
-        productList = jsonDecode(request.body);
-        debugPrint(productList.toString());
+        debugPrint("SUCCESS");
+        return jsonDecode(request.body);
       } else {
         debugPrint("ERROR");
+        return [];
       }
     } catch (e) {
       Notifications.error("COULD NOT GET PRODUCTS");
 
       debugPrint("ERROR");
+      return [];
     }
   }
+
 }
