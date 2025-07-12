@@ -1,3 +1,4 @@
+import 'package:appmatic_test_project/app_widget.dart';
 import 'package:appmatic_test_project/core/api/api.dart';
 import 'package:appmatic_test_project/core/component/clipper_container.dart';
 import 'package:appmatic_test_project/core/component/product_display_card.dart';
@@ -21,11 +22,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List? product;
   void getProduct() async {
     final data = await Api.fetchProduct();
-    context.read<HomeCubit>().updateList(data);
-    print("THIS IS PRODUCTLIST ${context.read<HomeCubit>().updateList(data)}");
+    appRouter.navigatorKey.currentContext!.read<HomeCubit>().updateList(data);
   }
 
   @override

@@ -1,3 +1,4 @@
+import 'package:appmatic_test_project/app_widget.dart';
 import 'package:appmatic_test_project/core/extention/extention.dart';
 import 'package:appmatic_test_project/core/router/app_router.dart';
 import 'package:appmatic_test_project/core/theme/theme.dart';
@@ -14,7 +15,7 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   autoNavigation() {
-    context.router.replaceAll([const NavBarRoute()]);
+    appRouter.navigatorKey.currentContext!.router.replaceAll([const NavBarRoute()]);
   }
 
   delayAutoNavigation() {

@@ -2,7 +2,9 @@ import 'package:appmatic_test_project/app_widget.dart';
 import 'package:appmatic_test_project/core/api/api.dart';
 import 'package:appmatic_test_project/core/extention/extention.dart';
 import 'package:appmatic_test_project/core/theme/theme.dart';
+import 'package:appmatic_test_project/features/home/bloc/home_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Notifications {
   static message({required String message}) {
@@ -59,9 +61,10 @@ class Notifications {
                 fixedSize: const Size(double.maxFinite, 40),
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
-              onPressed: () {Navigator.pop(context);
-                Api.fetchProduct();
-
+              onPressed: () async {
+                Navigator.pop(context);
+                final data = await Api.fetchProduct();
+                appRouter.navigatorKey.currentContext!.read<HomeCubit>().updateList(data);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
